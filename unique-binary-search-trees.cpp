@@ -1,19 +1,14 @@
-int numTrees(int n) {
-    if(n==0)
-    return 0;
-    if(n==1)
-    return 1;
-    if(n==2)
-    return 2;
-    int ret=0;
-    for(int i=1;i<=n;i++)
-    {   
-        if(i==1||i==n)
-        ret=ret+numTrees(n-1);
-        else
-        {
-        ret=ret+numTrees(i-1)*numTrees(n-i);
+class Solution {
+public:
+    int numTrees(int n) {
+        vector<int> f;
+        f.push_back(1);
+        for (int i = 1; i <= n; ++i) {
+            int t = 0;
+            for (int j = 0; j < i; ++j)
+                t += f[j] * f[i-j-1];
+            f.push_back(t);
         }
+        return f.back();
     }
-    return ret;
-}
+};
